@@ -49,12 +49,15 @@ module.exports = function (source, options) {
 	options = assign({}, options);
 	options.container = options.container || 'gulp-ruby-sass';
 
-	// sourcemap can only be true or false; warn those trying to pass a Sass string option
+	sourcemap can only be true or false; warn those trying to pass a Sass string option
 	if (typeof options.sourcemap === 'string') {
 		throw newErr('The sourcemap option must be true or false. See the readme for instructions on using Sass sourcemaps with gulp.');
 	}
 
 	options.sourcemap = options.sourcemap ? 'file' : 'none';
+	if (options.sourcemap == 'none') {
+		delete options['sourcemap'];
+	}
 
 	// directory source
 	if (path.extname(source) === '') {
